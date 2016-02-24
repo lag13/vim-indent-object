@@ -24,17 +24,41 @@
 "
 "--------------------------------------------------------------------------------
 
-" Mappings excluding line below.
-onoremap <silent>iI :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 0, 0, [line("."), line("."), col("."), col(".")])<CR>
-onoremap <silent>ii :<C-u>cal <Sid>HandleTextObjectMapping(1, 0, 0, 0, [line("."), line("."), col("."), col(".")])<CR>
-vnoremap <silent>iI :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 0, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
-vnoremap <silent>ii :<C-u>cal <Sid>HandleTextObjectMapping(1, 0, 0, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+" Current indent level
+onoremap <silent> <Plug>indentobjectsmall :<C-u>cal <Sid>HandleTextObjectMapping(1, 0, 0, 0, [line("."), line("."), col("."), col(".")])<CR>
+vnoremap <silent> <Plug>indentobjectsmall :<C-u>cal <Sid>HandleTextObjectMapping(1, 0, 0, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
 
-" Mappings including line below.
-onoremap <silent>ai :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 1, 0, [line("."), line("."), col("."), col(".")])<CR>
-onoremap <silent>aI :<C-u>cal <Sid>HandleTextObjectMapping(0, 1, 1, 0, [line("."), line("."), col("."), col(".")])<CR>
-vnoremap <silent>ai :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 1, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
-vnoremap <silent>aI :<C-u>cal <Sid>HandleTextObjectMapping(0, 1, 1, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+" Include line above
+onoremap <silent> <Plug>indentobjectmedium :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 0, 0, [line("."), line("."), col("."), col(".")])<CR>
+vnoremap <silent> <Plug>indentobjectmedium :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 0, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+
+" Include line above and below
+onoremap <silent> <Plug>indentobjectlarge :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 1, 0, [line("."), line("."), col("."), col(".")])<CR>
+vnoremap <silent> <Plug>indentobjectlarge :<C-u>cal <Sid>HandleTextObjectMapping(0, 0, 1, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+
+" Include 2 lines above and one below
+onoremap <silent> <Plug>indentobjectxlarge :<C-u>cal <Sid>HandleTextObjectMapping(0, 1, 1, 0, [line("."), line("."), col("."), col(".")])<CR>
+vnoremap <silent> <Plug>indentobjectxlarge :<C-u>cal <Sid>HandleTextObjectMapping(0, 1, 1, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+
+if !hasmapto("<Plug>indentobjectsmall")
+	omap ii <Plug>indentobjectsmall
+	vmap ii <Plug>indentobjectsmall
+endif
+
+if !hasmapto("<Plug>indentobjectmedium")
+	omap iI <Plug>indentobjectmedium
+	vmap iI <Plug>indentobjectmedium
+endif
+
+if !hasmapto("<Plug>indentobjectlarge")
+	omap ai <Plug>indentobjectlarge
+	vmap ai <Plug>indentobjectlarge
+endif
+
+if !hasmapto("<Plug>indentobjectxlarge")
+	omap aI <Plug>indentobjectxlarge
+	vmap aI <Plug>indentobjectxlarge
+endif
 
 let s:l0 = -1
 let s:l1 = -1
